@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookbook</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Set background image */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            background-image: url('bg.png'); /* Path to your background image */
+            background-size: cover; /* Ensure the image covers the entire screen */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Prevent repeating the image */
+            margin: 0; /* Remove default body margin */
+            font-family: Optima, sans-serif;
+        }
+
+        /* Content container with flex */
+        .content {
+            display: flex;
+            align-items: stretch; /* Stretch the content to match the background height */
+            justify-content: center;
+            flex-direction: row;
+            height: 100%; /* Full height of the viewport */
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* Cookbook cover styling */
+        .cookbook-cover {
+            width: auto; /* Keep original width */
+            height: 100vh; /* Match the height of the background */
+            object-fit: cover; /* Ensure the image fills the area without stretching */
+            margin-right: 20px; /* Space between image and text */
+        }
+
+        /* Text and button container */
+        .text-container {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            max-width: 400px; /* Prevent text from becoming too wide */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Title text styling with border effect around the text */
+        .text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 
+                2px 2px 0 #546985,  
+                -2px -2px 0 #546985,
+                2px -2px 0 #546985,
+                -2px 2px 0 #546985; /* Creating a border-like effect around the text */
+        }
+
+        /* Button styling */
+        .download-btn {
+            padding: 12px 24px;
+            background-color: #385071;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+        /* Button hover effect */
+        .download-btn:hover {
+            background-color: #708299;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation navbar navbar-dark">
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="letter.html">Letter</a></li>
+            <li><a class="nav-link" href="#">Music</a></li>
+            <li><a class="nav-link" href="game.html">Game</a></li>
+            <li><a class="nav-link active" href="cookbook.html">Cookbook</a></li>
+            <li><a class="nav-link " href="testtarot.html">Tarot</a></li>
+        </ul>
+    </nav>
+   
+    <div class="content">
+        <!-- Cookbook cover image -->
+        <img src="cookbookcover.jpg" alt="Cookbook Cover" class="cookbook-cover">
+        
+        <!-- Text and download button -->
+        <div class="text-container">
+            <div class="text">Vee's personal cookbook for you<3</div>
+            <a href="cookbook.pdf" download>
+                <button class="download-btn">Download</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Reading</title>
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+<body>
+    <nav class="navigation navbar navbar-dark">
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="letter.html">Letter</a></li>
+            <li><a class="nav-link" href="#">Music</a></li>
+            <li><a class="nav-link" href="#">Game</a></li>
+            <li><a class="nav-link" href="cookbook.html">Cookbook</a></li>
+            <li><a class="nav-link active" href="#">Tarot</a></li>
+        </ul>
+    </nav>
+   
+    <h1>Tarot Reading</h1>
+    <div class="tarot-container">
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front" style="background-image: url('high.png');"></div>
+                <div class="card-back" style="background-image: url('img7.jpg');"></div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front" style="background-image: url('strength.png');"></div>
+                <div class="card-back" style="background-image: url('img8.jpg');"></div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front" style="background-image: url('cups.png');"></div>
+                <div class="card-back" style="background-image: url('img9.jpg');"></div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front" style="background-image: url('page.png');"></div>
+                <div class="card-back" style="background-image: url('img10.jpg');"></div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front" style="background-image: url('the.png');"></div>
+                <div class="card-back" style="background-image: url('img11.jpg');"></div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front" style="background-image: url('themoon.png');"></div>
+                <div class="card-back" style="background-image: url('img12.jpg');"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Assuming navbar styles are in style.css -->
+    <style>
+        /* Background */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('bg.png'); /* Adjust path if needed */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Optima, sans-serif;
+        }
+
+        /* Navbar */
+        .navigation.navbar {
+            width: 100%;
+            background-color: #385071;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navigation.navbar-dark .navbar-nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navigation.navbar-dark .navbar-nav .nav-link {
+            padding: 15px 30px;
+            color: #fbfcfc;
+            font-size: 17px;
+            font-weight: 400;
+            border-radius: 30px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navigation.navbar-dark .navbar-nav .nav-link:hover,
+        .navigation.navbar-dark .navbar-nav .nav-link:focus {
+            color: #fff;
+            background: #708299;
+        }
+
+        .navigation.navbar-dark .navbar-nav .active>.nav-link,
+        .navigation.navbar-dark .navbar-nav .nav-link.active {
+            color: #fff;
+            background: #708299;
+        }
+
+        /* Grid Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 100px; /* Offset from fixed navbar */
+        }
+
+        /* Image Styling */
+        .grid-item img {
+            width: 100%;
+            max-width: 300px; /* Reduced image size */
+            height: auto;
+            border-radius: 8px; /* Softer rounded edges */
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            cursor: pointer;
+        }
+
+        /* Click Animation */
+        .grid-item img.clicked {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* Stack images on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navigation navbar navbar-dark">
+        <ul class="navbar-nav">
+            <li><a class="nav-link active" href="letter.html">Letter</a></li>
+            <li><a class="nav-link" href="#">Music</a></li>
+            <li><a class="nav-link" href="#">Game</a></li>
+            <li><a class="nav-link" href="cookbook.html">Cookbook</a></li>
+            <li><a class="nav-link " href="testtarot.html">Tarot</a></li>
+        </ul>
+    </nav>
+
+    <!-- Image Grid -->
+    <div class="grid-container">
+        <div class="grid-item"><img src="letter1.png" alt="Image 1" class="clickable" onclick="window.location.href='letter1.html';"></div>
+        <div class="grid-item"><img src="letter2.png" alt="Image 2" class="clickable" onclick="window.location.href='letter2.html';"></div>
+        <div class="grid-item"><img src="letter3.png" alt="Image 3" class="clickable" onclick="window.location.href='letter3.html';"></div>
+        <div class="grid-item"><img src="letter4.png" alt="Image 4" class="clickable" onclick="window.location.href='letter4.html';"></div>
+        
+    </div>
+
+    <script>
+        document.querySelectorAll('.clickable').forEach(img => {
+            img.addEventListener('click', () => {
+                img.classList.toggle('clicked'); // Toggles animation on click
+            });
+        });
+    </script>
+
+</body>
+</html>

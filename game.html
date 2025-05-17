@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playable Chess Game</title>
+
+    <!-- Load Chessboard CSS -->
+    <link rel="stylesheet" href="css/chessboard.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Load Chess.js (Game Logic) -->
+    <script src="js/chessboard.min.js"></script>
+
+    <!-- Load Chessboard.js (UI) -->
+    <script src="js/chessboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('bg.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #chess-container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #chessboard {
+            width: 400px;
+            height: 400px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            background-color: white;
+        }
+
+        #status {
+            font-size: 18px;
+            color: #fff;
+            background: #708299;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        #reset {
+            background-color: #385071;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        #reset:hover {
+            background-color: #60738a;
+        }
+
+        #captured-pieces {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            width: 400px;
+            font-size: 16px;
+        }
+
+        .captured {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .captured span {
+            font-weight: bold;
+        }
+
+        .check {
+            background-color: red !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation navbar navbar-dark">
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="letter.html">Letter</a></li>
+            <li><a class="nav-link" href="#">Music</a></li>
+            <li><a class="nav-link active" href="game.html">Game</a></li>
+            <li><a class="nav-link " href="cookbook.html">Cookbook</a></li>
+            <li><a class="nav-link " href="testtarot.html">Tarot</a></li>
+        </ul>
+    </nav>
+   
+    <div id="chess-container">
+        <div id="chessboard"></div>
+        <div id="status">White's Turn</div>
+        <button id="reset">Reset Game</button>
+        <div id="captured-pieces">
+            <div>
+                <strong>White Captured:</strong>
+                <div id="white-captured" class="captured"></div>
+            </div>
+            <div>
+                <strong>Black Captured:</strong>
+                <div id="black-captured" class="captured"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize the Chess game using Chess.js
+            let game = new Chess();
+
+            // Captured pieces arrays
+            let whiteCaptured = [];
+            let blackCaptured = [];
+
+            // Initialize the Chessboard.js board
+            let board = Chessboard('chessboard', {
+                draggable: true,
+                dropOffBoard: 'trash',
+                position: 'start',
+                onDragStart: onDragStart,
+                onDrop: onDrop,
+                onSnapEnd: onSnapEnd
+            });
+
+            // Prevent moving pieces if the game is over or if the piece is the opponent's
+            function onDragStart(source, piece) {
+                if (game.game_over()) return false;
+                if ((game.turn() === 'w' && piece.startsWith('b')) || (game.turn() === 'b' && piece.startsWith('w'))) {
+                    return false;
+                }
+            }
+
+            // Handle piece drop and validate the move
+            function onDrop(source, target) {
+                let move = game.move({
+                    from: source,
+                    to: target,
+                    promotion: 'q' // Always promote pawns to a queen
+                });
+
+                // If move is invalid, snapback
+                if (move === null) return 'snapback';
+
+                // Update captured pieces display
+                updateCapturedPieces(move);
+
+                // Update game status after the move
+                updateStatus();
+            }
+
+            // Update the board after each move
+            function onSnapEnd() {
+                board.position(game.fen());
+            }
+
+            // Update captured pieces display
+            function updateCapturedPieces(move) {
+                // If the move captured a piece, update the captured array and display
+                if (move.captured) {
+                    if (move.color === 'w') {
+                        whiteCaptured.push(move.captured);
+                    } else {
+                        blackCaptured.push(move.captured);
+                    }
+                    renderCapturedPieces();
+                }
+            }
+
+            function renderCapturedPieces() {
+                document.getElementById('white-captured').textContent = whiteCaptured.join(', ');
+                document.getElementById('black-captured').textContent = blackCaptured.join(', ');
+            }
+
+            function checkForCheck() {
+                // Check if the King is in check
+                if (game.in_check()) {
+                    let checkColor = game.turn() === 'w' ? 'White' : 'Black';
+                    document.getElementById('status').textContent = checkColor + " is in Check!";
+                    highlightKingInCheck();
+                }
+            }
+
+            function highlightKingInCheck() {
+                // Highlight the square where the King is
+                let kingSquare = game.king(game.turn());
+                board.highlightSquare(kingSquare, 'check');
+            }
+
+            // Update game status (e.g., whose turn it is, check, checkmate, draw)
+           // Update game status (e.g., whose turn it is, check, checkmate, draw)
+function updateStatus() {
+    let status = game.turn() === 'w' ? "White's Turn" : "Black's Turn";
+
+    if (game.in_checkmate()) {
+        // Display checkmate message with the winner
+        status = "Checkmate! " + (game.turn() === 'w' ? "Black" : "White") + " Wins!";
+    } else if (game.in_draw()) {
+        status = "Draw!";
+    } else if (game.in_check()) {
+        // Display check status
+        status = game.turn() === 'w' ? "White is in Check!" : "Black is in Check!";
+    }
+
+    document.getElementById('status').textContent = status;
+}
+
+
+            // Reset the game to the starting position
+            document.getElementById('reset').addEventListener('click', () => {
+                game.reset();
+                board.position('start');
+                whiteCaptured = [];
+                blackCaptured = [];
+                renderCapturedPieces();
+                updateStatus();
+            });
+
+            // Initialize the status
+            updateStatus();
+        });
+    </script>
+
+</body>
+</html>

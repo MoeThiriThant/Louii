@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter 4 - Birthday Meal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Body Styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fdf2f2; /* Light pastel background */
+            margin: 0;
+            font-family: 'Georgia', serif;
+            color: #444;
+        }
+
+        /* Navbar */
+        .navigation.navbar {
+            width: 100%;
+            background-color: #ffb6c1; /* Soft rose pink */
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navigation.navbar-dark .navbar-nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navigation.navbar-dark .navbar-nav .nav-link {
+            padding: 12px 25px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: 30px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navigation.navbar-dark .navbar-nav .nav-link:hover {
+            background: #ffcccb; /* Soft pink hover effect */
+            color: #ff69b4;
+        }
+
+        .navigation.navbar-dark .navbar-nav .active>.nav-link {
+            background: #ff69b4;
+            color: white;
+        }
+
+        /* Birthday Meal Section */
+        .birthday-meal-container {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 120px; /* Adjusted for navbar spacing */
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Birthday Title */
+        .letter-title {
+            font-size: 36px;
+            color: #ff69b4; /* Bright pink */
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Table Layout for Meals */
+        .meal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .meal-table td, .meal-table th {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .meal-table img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .meal-table img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Uber Eats Voucher */
+        .voucher-link {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .voucher-link:hover {
+            background-color: #ffcccb;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #ffcccb;
+            transform: scale(1.1);
+        }
+
+        .back-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navigation navbar navbar-dark">
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="letter.html">Back to Letters</a></li>
+            <li><a class="nav-link" href="music.html">Music</a></li>
+            <li><a class="nav-link" href="games.html">Games</a></li>
+            <li><a class="nav-link" href="cookbook.html">Cookbook</a></li>
+            <li><a class="nav-link" href="testtarot.html">Tarot</a></li>
+        </ul>
+    </nav>
+
+    <!-- Birthday Meal Section -->
+    <div class="birthday-meal-container">
+        <div class="letter-title">Happy Birthday! 🎉</div>
+        
+        <!-- Table Layout for Meals -->
+        <table class="meal-table">
+            <tr>
+                <th>Meal 1</th>
+                <th>Meal 2</th>
+            </tr>
+            <tr>
+                <td><img src="meal1.png" alt="Meal 1"></td>
+                <td><img src="meal2.png" alt="Meal 2"></td>
+            </tr>
+            <tr>
+                <th>Meal 3</th>
+                <th>Meal 4</th>
+            </tr>
+            <tr>
+                <td><img src="meal3.png" alt="Meal 3"></td>
+                <td><img src="meal4.png" alt="Meal 4"></td>
+            </tr>
+        </table>
+
+        <!-- Uber Eats Voucher Link -->
+        <a href="https://www.ubereats.com/gift-card" class="voucher-link" target="_blank">Get Your Uber Eats Voucher Here! 🍔</a>
+
+        <!-- Back Button -->
+        <a href="letter.html" class="back-btn">Back to Letters</a>
+    </div>
+
+</body>
+</html>
